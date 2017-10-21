@@ -144,4 +144,28 @@ public class EmployeeController implements EmployeeControllerRemote, EmployeeCon
             throw new InvalidLoginCredentialException("Username does not exist or invalid password");
         }
     }
+    
+    
+    @Override
+    public void changePassword(Long employeeId, String currentPassword, String newPassword) throws EmployeeNotFoundException
+    {
+        try
+        {
+            Employee employee = retrieveEmployeeByEmployeeId(employeeId);
+
+            if(employee.getPassword().equals(currentPassword))
+            {
+                employee.setPassword(newPassword);
+            }
+            else
+            {
+                
+            }
+        } 
+        catch (EmployeeNotFoundException ex)
+        {
+            System.out.println("Employee ID " + employeeId + " do not exist!");
+        }
+    }
+    
 }

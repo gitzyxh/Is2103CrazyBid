@@ -5,17 +5,24 @@
  */
 package oasadministrationpanel;
 
-/**
- *
- * @author HXYZ
- */
+import ejb.session.stateless.AuctionControllerRemote;
+import ejb.session.stateless.CreditPackageControllerRemote;
+import ejb.session.stateless.EmployeeControllerRemote;
+import javax.ejb.EJB;
+
+
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
+    @EJB
+    private static CreditPackageControllerRemote creditPackageControllerRemote;
+    @EJB
+    private static AuctionControllerRemote auctionControllerRemote;
+    @EJB
+    private static EmployeeControllerRemote employeeControllerRemote;
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        MainApp mainApp = new MainApp(creditPackageControllerRemote, auctionControllerRemote, employeeControllerRemote);
+        mainApp.runApp();
     }
     
 }

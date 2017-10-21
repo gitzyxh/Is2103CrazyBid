@@ -31,6 +31,14 @@ public class Employee implements Serializable {
     private String userName;
     @Column(length = 32, nullable = false)
     private String password;
+    @Column(length = 8, nullable = false)
+    private String contactNumber;
+    @Column(length = 9, nullable = false)
+    private String identificationNumber;
+    @Column(length = 64, nullable = false)
+    private String address1;
+    @Column(length = 6, nullable = false)
+    private String postalCode;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private EmployeeAccessRightEnum accessRight;
@@ -38,11 +46,15 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public Employee(String firstName, String lastName, String userName, String password, EmployeeAccessRightEnum accessRight) {
+    public Employee(String firstName, String lastName, String userName, String password, String contactNumber, String identificationNumber, String address1, String postalCode, EmployeeAccessRightEnum accessRight) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
+        this.contactNumber = contactNumber;
+        this.identificationNumber = identificationNumber;
+        this.address1 = address1;
+        this.postalCode = postalCode;
         this.accessRight = accessRight;
     }
     
@@ -117,6 +129,38 @@ public class Employee implements Serializable {
 
     public void setAccessRight(EmployeeAccessRightEnum accessRight) {
         this.accessRight = accessRight;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getIdentificationNumber() {
+        return identificationNumber;
+    }
+
+    public void setIdentificationNumber(String identificationNumber) {
+        this.identificationNumber = identificationNumber;
+    }
+
+    public String getAddress1() {
+        return address1;
+    }
+
+    public void setAddress1(String address1) {
+        this.address1 = address1;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
     
 }

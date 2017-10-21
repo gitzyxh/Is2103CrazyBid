@@ -27,5 +27,7 @@ public interface EmployeeControllerLocal {
     public void deleteEmployee(Long employeeId) throws EmployeeNotFoundException;
 
     public Employee employeeLogin(String userName, String password) throws InvalidLoginCredentialException, EmployeeNotFoundException;
+
+    public void changePassword(Long employeeId, String currentPassword, String newPassword) throws EmployeeNotFoundException;
     
 }
