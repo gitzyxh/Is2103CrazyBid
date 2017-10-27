@@ -7,6 +7,7 @@ package ejb.session.stateless;
 
 import entity.Auction;
 import entity.Employee;
+import entity.Transaction;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -153,20 +154,16 @@ public class AuctionController implements AuctionControllerRemote, AuctionContro
     
 
     @Override
-    public void deleteAuction(Long auctionId, Long employeeId) throws AuctionNotFoundException, EmployeeNotFoundException
+    public void deleteAuction(Long auctionId)
     {
-        Auction auction = retrieveAuctionByAuctionId(auctionId);
-        Employee employee = employeeControllerLocal.retrieveEmployeeByEmployeeId(employeeId);
-        
-        if (auction != null)
+        try
         {
-            auction.setEmployee(null);
-            employee.getAuctions().remove(auction);
+            Auction auction = retrieveAuctionByAuctionId(auctionId);
             em.remove(auction);
-        }
-        else
+        } 
+        catch (AuctionNotFoundException ex)
         {
-            throw new AuctionNotFoundException("Auction ID " + auctionId + " do not exist!");
+            System.out.println("Auction with same ID already exist");
         }
     }
     

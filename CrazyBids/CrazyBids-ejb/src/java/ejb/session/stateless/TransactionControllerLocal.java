@@ -17,5 +17,11 @@ public interface TransactionControllerLocal {
     public List<Transaction> retrieveAllTransactions();
 
     public Transaction retrieveTransactionByTransactionId(Long transactionId) throws TransactionNotFoundException;
+
+    public void setAuctionToTransaction(Long transactionId, Long auctionId);
+
+    public void setCustomerToTransaction(Long transactionId, Long customerId);
+
+    public void deleteTransaction(Long transactionId) throws TransactionNotFoundException;
     
 }

@@ -14,8 +14,6 @@ import util.exception.InvalidLoginCredentialException;
 
 
 public interface CustomerControllerRemote {
-    
-    public Customer createNewCustomer(Customer customer) throws CustomerExistException, GeneralException;
 
     public List<Customer> retrieveAllCustomers();
 
@@ -31,5 +29,7 @@ public interface CustomerControllerRemote {
     
     public Customer retrieveCustomerByCustomerId(Long customerId) throws CustomerNotFoundException;
 
+    public Customer createNewCustomer(Customer customer, Long auctionId) throws CustomerExistException, GeneralException;
     
+    public void setAuctionToCustomer(Long customerId, Long auctionId);
 }

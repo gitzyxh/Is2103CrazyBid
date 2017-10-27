@@ -28,6 +28,6 @@ public interface AuctionControllerRemote {
     
     public Auction createNewAuction(Auction auction, Long employeeId) throws AuctionExistException, GeneralException, EmployeeNotFoundException;
     
-    public void deleteAuction(Long auctionId, Long employeeId) throws AuctionNotFoundException, EmployeeNotFoundException;
+    public void deleteAuction(Long auctionId) throws AuctionNotFoundException;
     
 }

@@ -5,8 +5,10 @@
  */
 package ejb.session.stateless;
 
+import entity.Auction;
 import entity.Customer;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -16,6 +18,7 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import util.exception.AuctionNotFoundException;
 import util.exception.CustomerExistException;
 import util.exception.CustomerNotFoundException;
 import util.exception.GeneralException;
@@ -27,6 +30,9 @@ import util.exception.InvalidLoginCredentialException;
 @Remote(CustomerControllerRemote.class)
 public class CustomerController implements CustomerControllerRemote, CustomerControllerLocal {
 
+    @EJB
+    private AuctionControllerLocal auctionControllerLocal;
+
     @PersistenceContext(unitName = "CrazyBids-ejbPU")
     private EntityManager em;
 
@@ -35,10 +41,10 @@ public class CustomerController implements CustomerControllerRemote, CustomerCon
 
     
     @Override
-    public Customer createNewCustomer(Customer customer) throws CustomerExistException, GeneralException
+    public Customer createNewCustomer(Customer customer, Long auctionId) throws CustomerExistException, GeneralException
     {
         try
-        {
+        {   
             em.persist(customer);
             em.flush();
             em.refresh(customer);
@@ -135,6 +141,9 @@ public class CustomerController implements CustomerControllerRemote, CustomerCon
         
         if (customer != null) 
         {
+            customer.getAuctions().remove(customer);
+            customer.getAuctions().clear();
+            
             em.remove(customer);
         }
         else
@@ -165,4 +174,23 @@ public class CustomerController implements CustomerControllerRemote, CustomerCon
             throw new InvalidLoginCredentialException("Username does not exist or invalid password");
         }
     }
+    
+    
+    @Override
+    public void setAuctionToCustomer(Long customerId, Long auctionId)
+    {
+        try
+        {
+            Auction auction = auctionControllerLocal.retrieveAuctionByAuctionId(auctionId);
+            Customer customer = retrieveCustomerByCustomerId(customerId);
+            
+            customer.getAuctions().add(auction);
+            auction.getCustomers().add(customer);
+        }
+        catch (AuctionNotFoundException | CustomerNotFoundException ex)
+        {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+    
 }

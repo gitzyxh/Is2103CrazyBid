@@ -19,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import util.enumeration.AuctionStatus;
@@ -55,7 +56,7 @@ public class Auction implements Serializable {
     private Employee employee;
     @ManyToMany
     private List<Customer> customers;
-    @ManyToMany 
+    @OneToMany (mappedBy = "auction") 
     private List<Transaction> transactions;
 
     public Auction() {

@@ -182,7 +182,7 @@ public class FinanceModule {
                 System.out.print("Enter Employee ID> ");
                 Long employeeId = scanner.nextLong();
                 viewCreditPackage(creditPackageId);
-                creditPackageControllerRemote.deleteCreditPackage(creditPackageId, employeeId);
+                creditPackageControllerRemote.deleteCreditPackage(creditPackageId);
                 System.out.println("Credit Package deleted successfully!");
             }
             else if (input.equals("N"))
@@ -194,9 +194,9 @@ public class FinanceModule {
                 System.out.println("Invalid option. Please try again.");
             }
         }
-        catch (CreditPackageNotFoundException | EmployeeNotFoundException ex)
+        catch (CreditPackageNotFoundException ex)
         {
-            System.out.println("Error in removing credit package: " + ex.getMessage());
+            System.out.println("Credit Package does not exist!");
         }
     }
     

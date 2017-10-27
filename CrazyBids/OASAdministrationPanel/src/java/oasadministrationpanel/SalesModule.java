@@ -272,11 +272,8 @@ public class SalesModule {
             
             if (input.equals("Y"))
             {
-                System.out.println("Enter Employee ID> ");
-                
-                Long employeeId = scanner.nextLong();
                 viewAuctionListing(auctionId);
-                auctionControllerRemote.deleteAuction(auctionId, employeeId);
+                auctionControllerRemote.deleteAuction(auctionId);
                 System.out.println("Auction deleted successfully!");
             }
             else if (input.equals("N"))
@@ -288,7 +285,7 @@ public class SalesModule {
                 System.out.println("Invalid option. Please try again.");
             }
         }
-        catch (AuctionNotFoundException | EmployeeNotFoundException ex)
+        catch (AuctionNotFoundException ex)
         {
             System.out.println("Error in removing auction listing: " + ex.getMessage());
         }

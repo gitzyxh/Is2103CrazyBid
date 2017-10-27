@@ -16,8 +16,6 @@ import util.exception.InvalidLoginCredentialException;
 
 public interface CustomerControllerLocal {
 
-    public Customer createNewCustomer(Customer customer) throws CustomerExistException, GeneralException;
-
     public List<Customer> retrieveAllCustomers();
 
     public Customer retriveCustomerByIdentificationNumber(String identificationNumber) throws CustomerNotFoundException;
@@ -31,5 +29,9 @@ public interface CustomerControllerLocal {
     public Customer retrieveCustomerByUsername(String userName) throws CustomerNotFoundException;
 
     public Customer retrieveCustomerByCustomerId(Long customerId) throws CustomerNotFoundException;
+
+    public Customer createNewCustomer(Customer customer, Long auctionId) throws CustomerExistException, GeneralException;
+
+    public void setAuctionToCustomer(Long customerId, Long auctionId);
     
 }

@@ -23,5 +23,5 @@ public interface CreditPackageControllerRemote {
     
     public CreditPackage createNewCreditPackage(CreditPackage creditPackage, Long employeeId) throws CreditPackageExistException, GeneralException, EmployeeNotFoundException;
 
-    public void deleteCreditPackage(Long creditPackageId, Long employeeId) throws CreditPackageNotFoundException, EmployeeNotFoundException;
+    public void deleteCreditPackage(Long creditPackageId) throws CreditPackageNotFoundException;
 }

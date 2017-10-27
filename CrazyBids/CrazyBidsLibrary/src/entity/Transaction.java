@@ -18,6 +18,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import util.enumeration.TransactionType;
@@ -40,15 +42,13 @@ public class Transaction implements Serializable {
     
     @ManyToMany
     private List<CreditPackage> creditPackages;
-    @ManyToMany
-    private List<Customer> customers;
-    @ManyToMany
-    private List<Auction> auctions;
+    @ManyToOne
+    private Customer customer;
+    @ManyToOne
+    private Auction auction;
 
     public Transaction() {
         creditPackages = new ArrayList<>();
-        customers = new ArrayList<>();
-        auctions = new ArrayList<>();
     }
 
     public Transaction(TransactionType type, Date TransactionDateTime, BigDecimal amount) {
@@ -122,20 +122,20 @@ public class Transaction implements Serializable {
         this.creditPackages = creditPackages;
     }
 
-    public List<Customer> getCustomers() {
-        return customers;
+    public Auction getAuction() {
+        return auction;
     }
 
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
+    public void setAuction(Auction auction) {
+        this.auction = auction;
     }
 
-    public List<Auction> getAuctions() {
-        return auctions;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setAuctions(List<Auction> auctions) {
-        this.auctions = auctions;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
     
 }

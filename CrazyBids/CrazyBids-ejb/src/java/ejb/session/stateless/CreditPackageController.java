@@ -116,10 +116,10 @@ public class CreditPackageController implements CreditPackageControllerRemote, C
 
     
     @Override
-    public void deleteCreditPackage(Long creditPackageId, Long employeeId) throws CreditPackageNotFoundException, EmployeeNotFoundException
+    public void deleteCreditPackage(Long creditPackageId) throws CreditPackageNotFoundException
     {
         CreditPackage creditPackage = retrieveCreditPackageByCreditPackageId(creditPackageId);
-        Employee employee = employeeControllerLocal.retrieveEmployeeByEmployeeId(employeeId);
+        Employee employee = creditPackage.getEmployee();
         
         if (creditPackage != null) 
         {
